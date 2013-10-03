@@ -5,7 +5,7 @@ using System.Web;
 
 namespace University.Models
 {
-    public enum Grade
+    public enum GradeEnum
     {
         A, B, C, D, F
     }
@@ -15,7 +15,15 @@ namespace University.Models
         public int EnrollmentID { get; set; }
         public int CourseID { get; set; }
         public int StudentID { get; set; }
-        public Grade? Grade { get; set; } //? - is nullable
+        public GradeEnum? Grade { //? - is nullable
+            get {
+                return (GradeEnum?)GradeInternal;
+            } 
+            set {
+                GradeInternal = (int?)value;
+            }
+        } 
+        public int? GradeInternal { get; set; }
 
         public virtual Course Course { get; set; }
         public virtual Student Student { get; set; }

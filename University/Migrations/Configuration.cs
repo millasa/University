@@ -56,32 +56,32 @@ namespace University.Migrations
                 new Enrollment { 
                     StudentID = students.Single(s => s.LastName == "Alexander").StudentID, 
                     CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID, 
-                    Grade = Grade.A 
+                    Grade = GradeEnum.A 
                 },
                  new Enrollment { 
                     StudentID = students.Single(s => s.LastName == "Alexander").StudentID,
                     CourseID = courses.Single(c => c.Title == "Microeconomics" ).CourseID, 
-                    Grade = Grade.C 
+                    Grade = GradeEnum.C 
                  },                            
                  new Enrollment { 
                     StudentID = students.Single(s => s.LastName == "Alexander").StudentID,
                     CourseID = courses.Single(c => c.Title == "Macroeconomics" ).CourseID, 
-                    Grade = Grade.B
+                    Grade = GradeEnum.B
                  },
                  new Enrollment { 
                      StudentID = students.Single(s => s.LastName == "Alonso").StudentID,
                     CourseID = courses.Single(c => c.Title == "Calculus" ).CourseID, 
-                    Grade = Grade.B 
+                    Grade = GradeEnum.B 
                  },
                  new Enrollment { 
                      StudentID = students.Single(s => s.LastName == "Alonso").StudentID,
                     CourseID = courses.Single(c => c.Title == "Trigonometry" ).CourseID, 
-                    Grade = Grade.B 
+                    Grade = GradeEnum.B 
                  },
                  new Enrollment {
                     StudentID = students.Single(s => s.LastName == "Alonso").StudentID,
                     CourseID = courses.Single(c => c.Title == "Composition" ).CourseID, 
-                    Grade = Grade.B 
+                    Grade = GradeEnum.B 
                  },
                  new Enrollment { 
                     StudentID = students.Single(s => s.LastName == "Anand").StudentID,
@@ -90,22 +90,22 @@ namespace University.Migrations
                  new Enrollment { 
                     StudentID = students.Single(s => s.LastName == "Anand").StudentID,
                     CourseID = courses.Single(c => c.Title == "Microeconomics").CourseID,
-                    Grade = Grade.B         
+                    Grade = GradeEnum.B         
                  },
                 new Enrollment { 
                     StudentID = students.Single(s => s.LastName == "Barzdukas").StudentID,
                     CourseID = courses.Single(c => c.Title == "Chemistry").CourseID,
-                    Grade = Grade.B         
+                    Grade = GradeEnum.B         
                  },
                  new Enrollment { 
                     StudentID = students.Single(s => s.LastName == "Li").StudentID,
                     CourseID = courses.Single(c => c.Title == "Composition").CourseID,
-                    Grade = Grade.B         
+                    Grade = GradeEnum.B         
                  },
                  new Enrollment { 
                     StudentID = students.Single(s => s.LastName == "Justice").StudentID,
                     CourseID = courses.Single(c => c.Title == "Literature").CourseID,
-                    Grade = Grade.B         
+                    Grade = GradeEnum.B         
                  }
             };
 

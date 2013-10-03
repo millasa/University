@@ -167,6 +167,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -175,6 +176,10 @@
     <Compile Include="Migrations\201310021947040_InitialCreate.cs" />
     <Compile Include="Migrations\201310021947040_InitialCreate.Designer.cs">
       <DependentUpon>201310021947040_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310031958469_WithGrade.cs" />
+    <Compile Include="Migrations\201310031958469_WithGrade.Designer.cs">
+      <DependentUpon>201310031958469_WithGrade.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -294,6 +299,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Details.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -304,6 +314,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201310021947040_InitialCreate.resx">
       <DependentUpon>201310021947040_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310031958469_WithGrade.resx">
+      <DependentUpon>201310031958469_WithGrade.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
