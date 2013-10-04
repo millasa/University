@@ -17,9 +17,37 @@ namespace University.Controllers
         //
         // GET: /Student/
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.Students.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            var students = from s in db.Students
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())
+                                       || s.FirstMidName.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    students = students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                case "Date_desc":
+                    students = students.OrderByDescending(s => s.EnrollmentDate);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            //SQL query is not executed until convert the IQueryable object into a collection by calling a method such as ToList
+            return View(students.ToList());
         }
 
         //
@@ -86,22 +114,36 @@ namespace University.Controllers
         // POST: /Student/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Student student)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "StudentID, LastName, FirstMidName, EnrollmentDate")] Student student)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(student).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(student).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
             return View(student);
         }
 
         //
         // GET: /Student/Delete/5
 
-        public ActionResult Delete(int id = 0)
+        public ActionResult Delete(bool? saveChangesError = false, int id = 0)
         {
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+            }
             Student student = db.Students.Find(id);
             if (student == null)
             {
@@ -114,11 +156,25 @@ namespace University.Controllers
         // POST: /Student/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
-            db.SaveChanges();
+            try
+            {
+                Student student = db.Students.Find(id);
+                db.Students.Remove(student);
+
+                //if performance is critical, above code can be replaced with below code
+                //Student studentToDelete = new Student() { StudentID = id };
+                //db.Entry(studentToDelete).State = EntityState.Deleted;
+                
+                db.SaveChanges();
+            }
+            catch (DataException/* dex */)
+            {
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
+            
             return RedirectToAction("Index");
         }
 
