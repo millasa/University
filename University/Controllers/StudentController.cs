@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using University.Models;
 using University.DAL;
+using PagedList;
 
 namespace University.Controllers
 {
@@ -17,10 +18,23 @@ namespace University.Controllers
         //
         // GET: /Student/
 
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            
             var students = from s in db.Students
                            select s;
 
@@ -46,8 +60,11 @@ namespace University.Controllers
                     break;
             }
 
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
             //SQL query is not executed until convert the IQueryable object into a collection by calling a method such as ToList
-            return View(students.ToList());
+            return View(students.ToPagedList(pageNumber, pageSize));
         }
 
         //
