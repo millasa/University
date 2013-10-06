@@ -60,7 +60,7 @@ namespace University.Controllers
                     break;
             }
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
 
             //SQL query is not executed until convert the IQueryable object into a collection by calling a method such as ToList

@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace University.Models
 {
-    public class Student
+    public class Instructor
     {
-        public int StudentID { get; set; }
+        public int InstructorID { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 2)]
         [Display(Name = "Last Name")]
+        [StringLength(50, MinimumLength = 2)]
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "First name cannot be longer than 50 characters.")]
         [Column("FirstName")]
         [Display(Name = "First Name")]
+        [StringLength(50, MinimumLength = 2)]
         public string FirstMidName { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Enrollment Date")]
-        public DateTime EnrollmentDate { get; set; }
+        [Display(Name = "Hire Date")]
+        public DateTime HireDate { get; set; }
 
         public string FullName
         {
             get { return LastName + ", " + FirstMidName; }
         }
 
-        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
+        public virtual OfficeAssignment OfficeAssignment { get; set; }
     }
 }

@@ -187,10 +187,25 @@
     <Compile Include="Migrations\201310031958469_WithGrade.Designer.cs">
       <DependentUpon>201310031958469_WithGrade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310061921196_MaxLengthOnNames.cs" />
+    <Compile Include="Migrations\201310061921196_MaxLengthOnNames.Designer.cs">
+      <DependentUpon>201310061921196_MaxLengthOnNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310061926370_ColumnFirstName.cs" />
+    <Compile Include="Migrations\201310061926370_ColumnFirstName.Designer.cs">
+      <DependentUpon>201310061926370_ColumnFirstName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310062000548_TutorialChapter4.cs" />
+    <Compile Include="Migrations\201310062000548_TutorialChapter4.Designer.cs">
+      <DependentUpon>201310062000548_TutorialChapter4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\Instructor.cs" />
+    <Compile Include="Models\OfficeAssignment.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\EnrollmentDateGroup.cs" />
@@ -325,6 +340,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201310031958469_WithGrade.resx">
       <DependentUpon>201310031958469_WithGrade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310061921196_MaxLengthOnNames.resx">
+      <DependentUpon>201310061921196_MaxLengthOnNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310061926370_ColumnFirstName.resx">
+      <DependentUpon>201310061926370_ColumnFirstName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310062000548_TutorialChapter4.resx">
+      <DependentUpon>201310062000548_TutorialChapter4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
