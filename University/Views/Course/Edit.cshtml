@@ -8,11 +8,19 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
 
     <fieldset>
         <legend>Course</legend>
 
         @Html.HiddenFor(model => model.CourseID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CourseID)
+        </div>
+        <div class="editor-field">
+            @Html.DisplayFor(model => model.CourseID)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Title)

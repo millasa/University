@@ -8,9 +8,18 @@
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
 
     <fieldset>
         <legend>Course</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CourseID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CourseID)
+            @Html.ValidationMessageFor(model => model.CourseID)
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Title)
