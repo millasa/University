@@ -73,7 +73,7 @@ namespace University.Controllers
         public ActionResult Create()
         {
             ViewBag.InstructorID = new SelectList(db.OfficeAssignments, "InstructorID", "Location");
-            return View(new Instructor { FirstMidName = "Tom", LastName = "Dkystra", HireDate = DateTime.Now });
+            return View();
         }
 
         //
