@@ -20,7 +20,7 @@ namespace University.Models
         public DateTime StartDate { get; set; }
 
         [Display(Name = "Administrator")]
-        public int? InstructorID { get; set; }
+        public int? PersonID { get; set; }
 
         [Timestamp]
         public byte[] RowVersion { get; set; }

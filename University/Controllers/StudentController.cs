@@ -132,7 +132,7 @@ namespace University.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentID, LastName, FirstMidName, EnrollmentDate")] Student student)
+        public ActionResult Edit([Bind(Include = "PersonID, LastName, FirstMidName, EnrollmentDate")] Student student)
         {
             try
             {
@@ -182,7 +182,7 @@ namespace University.Controllers
                 db.Students.Remove(student);
 
                 //if performance is critical, above code can be replaced with below code
-                //Student studentToDelete = new Student() { StudentID = id };
+                //Student studentToDelete = new Student() { PersonID = id };
                 //db.Entry(studentToDelete).State = EntityState.Deleted;
                 
                 db.SaveChanges();

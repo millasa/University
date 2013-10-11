@@ -22,7 +22,7 @@
     @foreach (var item in Model.Instructors) 
     {
         string selectedRow = "";
-        if (item.InstructorID == ViewBag.InstructorID) 
+        if (item.PersonID == ViewBag.PersonID) 
         {
             selectedRow = "selectedrow";
         }
@@ -51,10 +51,10 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Select", "Index", new { id = item.InstructorID }) | 
-                @Html.ActionLink("Edit", "Edit", new { id=item.InstructorID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.InstructorID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.InstructorID })
+                @Html.ActionLink("Select", "Index", new { id = item.PersonID }) | 
+                @Html.ActionLink("Edit", "Edit", new { id=item.PersonID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.PersonID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.PersonID })
             </td>
         </tr>
     }

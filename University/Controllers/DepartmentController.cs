@@ -42,7 +42,7 @@ namespace University.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.InstructorID = new SelectList(db.Instructors, "InstructorID", "FullName");
+            ViewBag.PersonID = new SelectList(db.Instructors, "PersonID", "FullName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace University.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.InstructorID = new SelectList(db.Instructors, "InstructorID", "FullName", department.InstructorID);
+            ViewBag.PersonID = new SelectList(db.Instructors, "PersonID", "FullName", department.PersonID);
             return View(department);
         }
 
@@ -73,7 +73,7 @@ namespace University.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.InstructorID = new SelectList(db.Instructors, "InstructorID", "FullName", department.InstructorID);
+            ViewBag.PersonID = new SelectList(db.Instructors, "PersonID", "FullName", department.PersonID);
             return View(department);
         }
 
@@ -82,7 +82,7 @@ namespace University.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DepartmentID, Name, Budget, StartDate, RowVersion, InstructorID")] Department department)
+        public ActionResult Edit([Bind(Include = "DepartmentID, Name, Budget, StartDate, RowVersion, PersonID")] Department department)
         {
             try
             {
@@ -105,8 +105,8 @@ namespace University.Controllers
                     ModelState.AddModelError("Budget", "Current value: " + String.Format("{0:c}", databaseValues.Budget));
                 if (databaseValues.StartDate != clientValues.StartDate)
                     ModelState.AddModelError("StartDate", "Current value: " + String.Format("{0:d}", databaseValues.StartDate));
-                if (databaseValues.InstructorID != clientValues.InstructorID)
-                    ModelState.AddModelError("InstructorID", "Current value: " + db.Instructors.Find(databaseValues.InstructorID).FullName);
+                if (databaseValues.PersonID != clientValues.PersonID)
+                    ModelState.AddModelError("PersonID", "Current value: " + db.Instructors.Find(databaseValues.PersonID).FullName);
                 ModelState.AddModelError(string.Empty, "The record you attempted to edit "
                     + "was modified by another user after you got the original value. The "
                     + "edit operation was canceled and the current values in the database "
@@ -120,7 +120,7 @@ namespace University.Controllers
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
             }
 
-            ViewBag.InstructorID = new SelectList(db.Instructors, "InstructorID", "FullName", department.InstructorID);
+            ViewBag.PersonID = new SelectList(db.Instructors, "PersonID", "FullName", department.PersonID);
             return View(department);
         }
 

@@ -61,16 +61,16 @@ namespace University.Migrations
             {
                 new Department { Name = "English",     Budget = 100000, 
                     StartDate = DateTime.Parse("2007-09-01"), 
-                    InstructorID  = instructors.Single( i => i.LastName == "Abercrombie").InstructorID },
+                    PersonID  = instructors.Single( i => i.LastName == "Abercrombie").PersonID },
                 new Department { Name = "Mathematics", Budget = 350000, 
                     StartDate = DateTime.Parse("2007-09-01"), 
-                    InstructorID  = instructors.Single( i => i.LastName == "Fakhouri").InstructorID },
+                    PersonID  = instructors.Single( i => i.LastName == "Fakhouri").PersonID },
                 new Department { Name = "Engineering", Budget = 350000, 
                     StartDate = DateTime.Parse("2007-09-01"), 
-                    InstructorID  = instructors.Single( i => i.LastName == "Harui").InstructorID },
+                    PersonID  = instructors.Single( i => i.LastName == "Harui").PersonID },
                 new Department { Name = "Economics",   Budget = 100000, 
                     StartDate = DateTime.Parse("2007-09-01"), 
-                    InstructorID  = instructors.Single( i => i.LastName == "Kapoor").InstructorID }
+                    PersonID  = instructors.Single( i => i.LastName == "Kapoor").PersonID }
             };
          departments.ForEach(s => context.Departments.AddOrUpdate(p => p.Name, s));
          context.SaveChanges();
@@ -112,13 +112,13 @@ namespace University.Migrations
          var officeAssignments = new List<OfficeAssignment>
             {
                 new OfficeAssignment { 
-                    InstructorID = instructors.Single( i => i.LastName == "Fakhouri").InstructorID, 
+                    PersonID = instructors.Single( i => i.LastName == "Fakhouri").PersonID, 
                     Location = "Smith 17" },
                 new OfficeAssignment { 
-                    InstructorID = instructors.Single( i => i.LastName == "Harui").InstructorID, 
+                    PersonID = instructors.Single( i => i.LastName == "Harui").PersonID, 
                     Location = "Gowan 27" },
                 new OfficeAssignment { 
-                    InstructorID = instructors.Single( i => i.LastName == "Kapoor").InstructorID, 
+                    PersonID = instructors.Single( i => i.LastName == "Kapoor").PersonID, 
                     Location = "Thompson 304" },
             };
          officeAssignments.ForEach(s => context.OfficeAssignments.AddOrUpdate(p => p.Location, s));
@@ -139,56 +139,56 @@ namespace University.Migrations
          var enrollments = new List<Enrollment>
             {
                 new Enrollment { 
-                    StudentID = students.Single(s => s.LastName == "Alexander").StudentID, 
+                    PersonID = students.Single(s => s.LastName == "Alexander").PersonID, 
                     CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID, 
                     Grade = GradeEnum.A 
                 },
                  new Enrollment { 
-                    StudentID = students.Single(s => s.LastName == "Alexander").StudentID,
+                    PersonID = students.Single(s => s.LastName == "Alexander").PersonID,
                     CourseID = courses.Single(c => c.Title == "Microeconomics" ).CourseID, 
                     Grade = GradeEnum.C 
                  },                            
                  new Enrollment { 
-                    StudentID = students.Single(s => s.LastName == "Alexander").StudentID,
+                    PersonID = students.Single(s => s.LastName == "Alexander").PersonID,
                     CourseID = courses.Single(c => c.Title == "Macroeconomics" ).CourseID, 
                     Grade = GradeEnum.B
                  },
                  new Enrollment { 
-                     StudentID = students.Single(s => s.LastName == "Alonso").StudentID,
+                     PersonID = students.Single(s => s.LastName == "Alonso").PersonID,
                     CourseID = courses.Single(c => c.Title == "Calculus" ).CourseID, 
                     Grade = GradeEnum.B 
                  },
                  new Enrollment { 
-                     StudentID = students.Single(s => s.LastName == "Alonso").StudentID,
+                     PersonID = students.Single(s => s.LastName == "Alonso").PersonID,
                     CourseID = courses.Single(c => c.Title == "Trigonometry" ).CourseID, 
                     Grade = GradeEnum.B 
                  },
                  new Enrollment {
-                    StudentID = students.Single(s => s.LastName == "Alonso").StudentID,
+                    PersonID = students.Single(s => s.LastName == "Alonso").PersonID,
                     CourseID = courses.Single(c => c.Title == "Composition" ).CourseID, 
                     Grade = GradeEnum.B 
                  },
                  new Enrollment { 
-                    StudentID = students.Single(s => s.LastName == "Anand").StudentID,
+                    PersonID = students.Single(s => s.LastName == "Anand").PersonID,
                     CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID
                  },
                  new Enrollment { 
-                    StudentID = students.Single(s => s.LastName == "Anand").StudentID,
+                    PersonID = students.Single(s => s.LastName == "Anand").PersonID,
                     CourseID = courses.Single(c => c.Title == "Microeconomics").CourseID,
                     Grade = GradeEnum.B         
                  },
                 new Enrollment { 
-                    StudentID = students.Single(s => s.LastName == "Barzdukas").StudentID,
+                    PersonID = students.Single(s => s.LastName == "Barzdukas").PersonID,
                     CourseID = courses.Single(c => c.Title == "Chemistry").CourseID,
                     Grade = GradeEnum.B         
                  },
                  new Enrollment { 
-                    StudentID = students.Single(s => s.LastName == "Li").StudentID,
+                    PersonID = students.Single(s => s.LastName == "Li").PersonID,
                     CourseID = courses.Single(c => c.Title == "Composition").CourseID,
                     Grade = GradeEnum.B         
                  },
                  new Enrollment { 
-                    StudentID = students.Single(s => s.LastName == "Justice").StudentID,
+                    PersonID = students.Single(s => s.LastName == "Justice").PersonID,
                     CourseID = courses.Single(c => c.Title == "Literature").CourseID,
                     Grade = GradeEnum.B         
                  }
@@ -198,7 +198,7 @@ namespace University.Migrations
          {
             var enrollmentInDataBase = context.Enrollments.Where(
                 s =>
-                     s.Student.StudentID == e.StudentID &&
+                     s.Student.PersonID == e.PersonID &&
                      s.Course.CourseID == e.CourseID).SingleOrDefault();
             if (enrollmentInDataBase == null)
             {
