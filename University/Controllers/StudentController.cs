@@ -10,7 +10,17 @@ namespace University.Controllers
 {
     public class StudentController : Controller
     {
-        private SchoolContext db = new SchoolContext();
+        private IStudentRepository studentRepository;
+
+        public StudentController()
+        {
+            this.studentRepository = new StudentRepository(new SchoolContext());
+        }
+
+        public StudentController(IStudentRepository studentRepository)
+        {
+            this.studentRepository = studentRepository;
+        }
 
         //
         // GET: /Student/
@@ -31,8 +41,8 @@ namespace University.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            
-            var students = from s in db.Students
+
+            var students = from s in studentRepository.GetStudents()
                            select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -67,13 +77,9 @@ namespace University.Controllers
         //
         // GET: /Student/Details/5
 
-        public ActionResult Details(int id = 0)
+        public ViewResult Details(int id = 0)
         {
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
+            Student student = studentRepository.GetStudentByID(id);
             return View(student);
         }
 
@@ -97,8 +103,8 @@ namespace University.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Students.Add(student);
-                    db.SaveChanges();
+                    studentRepository.InsertStudent(student);
+                    studentRepository.Save();
                     return RedirectToAction("Index");
                 }
             }
@@ -114,13 +120,9 @@ namespace University.Controllers
         //
         // GET: /Student/Edit/5
 
-        public ActionResult Edit(int id = 0)
+        public ViewResult Edit(int id = 0)
         {
-            Student student = db.Students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
+            Student student = studentRepository.GetStudentByID(id);
             return View(student);
         }
 
@@ -135,8 +137,8 @@ namespace University.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(student).State = EntityState.Modified;
-                    db.SaveChanges();
+                    studentRepository.UpdateStudent(student);
+                    studentRepository.Save();
                     return RedirectToAction("Index");
                 }
             }
@@ -158,7 +160,7 @@ namespace University.Controllers
             {
                 ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
-            Student student = db.Students.Find(id);
+            Student student = studentRepository.GetStudentByID(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -175,14 +177,16 @@ namespace University.Controllers
         {
             try
             {
-                Student student = db.Students.Find(id);
-                db.Students.Remove(student);
+                Student student = studentRepository.GetStudentByID(id);
+                studentRepository.DeleteStudent(id);
+                studentRepository.Save();
 
-                //if performance is critical, above code can be replaced with below code
+                //if performance is critical, code
+                //  Student student = db.Students.Find(id);
+                //  db.Students.Remove(student);
+                //can be replaced with below code
                 //Student studentToDelete = new Student() { PersonID = id };
                 //db.Entry(studentToDelete).State = EntityState.Deleted;
-                
-                db.SaveChanges();
             }
             catch (DataException/* dex */)
             {
@@ -194,7 +198,7 @@ namespace University.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            studentRepository.Dispose();
             base.Dispose(disposing);
         }
     }

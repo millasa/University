@@ -177,7 +177,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\SchoolContext.cs" />
+    <Compile Include="DAL\IStudentRepository.cs" />
+    <Compile Include="DAL\StudentReporsitory.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
