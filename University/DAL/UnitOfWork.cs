@@ -7,7 +7,7 @@ namespace University.DAL
     {
         private SchoolContext context = new SchoolContext();
         private GenericRepository<Department> departmentRepository;
-        private GenericRepository<Course> courseRepository;
+        private CourseRepository courseRepository;
 
         public GenericRepository<Department> DepartmentRepository
         {
@@ -21,13 +21,13 @@ namespace University.DAL
             }
         }
 
-        public GenericRepository<Course> CourseRepository
+        public CourseRepository CourseRepository
         {
             get
             {
                 if (this.courseRepository == null)
                 {
-                    this.courseRepository = new GenericRepository<Course>(context);
+                    this.courseRepository = new CourseRepository(context);
                 }
                 return courseRepository;
             }

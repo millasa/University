@@ -14,10 +14,29 @@ namespace University.Controllers
         //
         // GET: /Course/
 
+        /*original Index method
         public ViewResult Index()
         {
-            var courses = unitOfWork.CourseRepository.Get(includeProperties: "Department");
+            //original code is:
+            //var courses = unitOfWork.CourseRepository.Get(includeProperties: "Department");
+
+            //new code is:
+            var courses = unitOfWork.CourseRepository.Get();
             return View(courses.ToList());
+        }
+        */
+
+        //new Index method
+        public ActionResult Index(int? SelectedDepartment)
+        {
+            var departments = unitOfWork.DepartmentRepository.Get(orderBy: q => q.OrderBy(d => d.Name));
+            ViewBag.SelectedDepartment = new SelectList(departments, "DepartmentID", "Name", SelectedDepartment);
+
+            int departmentID = SelectedDepartment.GetValueOrDefault();
+            return View(unitOfWork.CourseRepository.Get(
+                filter: d => !SelectedDepartment.HasValue || d.DepartmentID == departmentID,
+                orderBy: q => q.OrderBy(d => d.CourseID),
+                includeProperties: "Department"));
         }
 
         //
@@ -25,12 +44,15 @@ namespace University.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Course course = unitOfWork.CourseRepository.GetByID(id);
+            /* Course course = unitOfWork.CourseRepository.GetByID(id);
             if (course == null)
             {
                 return HttpNotFound();
             }
-            return View(course);
+            return View(course); */
+
+            var query = "SELECT * FROM Course WHERE CourseID = @p0";
+            return View(unitOfWork.CourseRepository.GetWithRawSql(query, id).Single());
         }
 
         //
@@ -107,6 +129,15 @@ namespace University.Controllers
 
             PopulateDepartmentsDropDownList(course.DepartmentID);
             return View(course);
+        }
+
+        public ActionResult UpdateCourseCredits(int? multiplier)
+        {
+            if (multiplier != null)
+            {
+                ViewBag.RowsAffected = unitOfWork.CourseRepository.UpdateCourseCredits(multiplier.Value);
+            }
+            return View();
         }
 
         //

@@ -6,6 +6,23 @@
 
 <h2>Details</h2>
 
+<!--
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.CourseID)</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>@Html.DisplayNameFor(model => model.Credits)</th>
+        <th>@Html.DisplayNameFor(model => model.Department.Name)</th>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(model => model.CourseID)</td>
+        <td>@Html.DisplayFor(model => model.Title)</td>
+        <td>@Html.DisplayFor(model => model.Credits)</td>
+        <td>@Html.DisplayFor(model => model.Department.Name)</td>
+    </tr>
+</table>
+-->
+
 <fieldset>
     <legend>Course</legend>
 
@@ -17,26 +34,27 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
+        @Html.LabelFor(model => model.Title)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Title)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Credits)
+         @Html.LabelFor(model => model.Credits)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Credits)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Department.Name)
+         @Html.LabelFor(model => model.Department.Name)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Department.Name)
     </div>
-</fieldset>
+</fieldset> 
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.CourseID }) |
     @Html.ActionLink("Back to List", "Index")

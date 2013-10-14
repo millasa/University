@@ -11,13 +11,14 @@ namespace University.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to My University!.";
+            ViewBag.Message = "Welcome to My University!";
 
             return View();
         }
 
         public ActionResult About()
         {
+            /* using LINQ
             var data = from student in db.Students
                        group student by student.EnrollmentDate into dateGroup
                        select new EnrollmentDateGroup()
@@ -25,6 +26,14 @@ namespace University.Controllers
                            EnrollmentDate = dateGroup.Key,
                            StudentCount = dateGroup.Count()
                        };
+            */
+
+            //using SqlQuery
+            var query = "SELECT EnrollmentDate, COUNT(*) AS StudentCount "
+                + "FROM Person "
+                + "WHERE EnrollmentDate IS NOT NULL "
+                + "GROUP BY EnrollmentDate";
+            var data = db.Database.SqlQuery<EnrollmentDateGroup>(query);
 
             return View(data);
         }
