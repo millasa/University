@@ -13,9 +13,6 @@ namespace University.Controllers
     {
         private SchoolContext db = new SchoolContext();
 
-        //
-        // GET: /Instructor/
-
         public ActionResult Index(int? id, int? courseID)
         {
             var viewModel = new InstructorIndexData();
@@ -52,9 +49,6 @@ namespace University.Controllers
             return View(viewModel);
         }
 
-        //
-        // GET: /Instructor/Details/5
-
         public ActionResult Details(int id = 0)
         {
             Instructor instructor = db.Instructors.Find(id);
@@ -65,17 +59,11 @@ namespace University.Controllers
             return View(instructor);
         }
 
-        //
-        // GET: /Instructor/Create
-
         public ActionResult Create()
         {
             ViewBag.PersonID = new SelectList(db.OfficeAssignments, "PersonID", "Location");
             return View();
         }
-
-        //
-        // POST: /Instructor/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -92,9 +80,6 @@ namespace University.Controllers
             return View(instructor);
         }
 
-        //
-        // GET: /Instructor/Edit/5
-
         public ActionResult Edit(int id = 0)
         {
             Instructor instructor = db.Instructors
@@ -106,9 +91,6 @@ namespace University.Controllers
             PopulateAssignedCourseData(instructor);
             return View(instructor);
         }
-
-        //
-        // POST: /Instructor/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -147,9 +129,6 @@ namespace University.Controllers
             return View(instructorToUpdate);
         }
 
-        //
-        // GET: /Instructor/Delete/5
-
         public ActionResult Delete(int id = 0)
         {
             Instructor instructor = db.Instructors.Find(id);
@@ -159,9 +138,6 @@ namespace University.Controllers
             }
             return View(instructor);
         }
-
-        //
-        // POST: /Instructor/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
