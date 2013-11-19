@@ -11,9 +11,6 @@ namespace University.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
-        //
-        // GET: /Course/
-
         /*original Index method
         public ViewResult Index()
         {
@@ -26,7 +23,6 @@ namespace University.Controllers
         }
         */
 
-        //new Index method
         public ActionResult Index(int? SelectedDepartment)
         {
             var departments = unitOfWork.DepartmentRepository.Get(orderBy: q => q.OrderBy(d => d.Name));
@@ -38,9 +34,6 @@ namespace University.Controllers
                 orderBy: q => q.OrderBy(d => d.CourseID),
                 includeProperties: "Department"));
         }
-
-        //
-        // GET: /Course/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -55,17 +48,11 @@ namespace University.Controllers
             return View(unitOfWork.CourseRepository.GetWithRawSql(query, id).Single());
         }
 
-        //
-        // GET: /Course/Create
-
         public ActionResult Create()
         {
             PopulateDepartmentsDropDownList();
             return View();
         }
-
-        //
-        // POST: /Course/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -90,9 +77,6 @@ namespace University.Controllers
             return View(course);
         }
 
-        //
-        // GET: /Course/Edit/5
-
         public ActionResult Edit(int id = 0)
         {
             Course course = unitOfWork.CourseRepository.GetByID(id);
@@ -104,9 +88,6 @@ namespace University.Controllers
             PopulateDepartmentsDropDownList(course.DepartmentID);
             return View(course);
         }
-
-        //
-        // POST: /Course/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -140,17 +121,11 @@ namespace University.Controllers
             return View();
         }
 
-        //
-        // GET: /Course/Delete/5
-
         public ActionResult Delete(int id = 0)
         {
             Course course = unitOfWork.CourseRepository.GetByID(id);
             return View(course);
         }
-
-        //
-        // POST: /Course/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
