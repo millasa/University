@@ -49,9 +49,6 @@ namespace University.Controllers
             return View(department);
         }
 
-        //
-        // GET: /Department/Edit/5
-
         public ActionResult Edit(int id = 0)
         {
             Department department = db.Departments.Find(id);
