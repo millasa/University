@@ -13,9 +13,6 @@ namespace University.Controllers
     {
         private SchoolContext db = new SchoolContext();
 
-        //
-        // GET: /Department/
-
         public ActionResult Index()
         {
             var departments = db.Departments.Include(d => d.Administrator);
