@@ -35,9 +35,6 @@ namespace University.Controllers
             return View();
         }
 
-        //
-        // POST: /Department/Create
-
         [HttpPost]
         public ActionResult Create(Department department)
         {
