@@ -19,9 +19,6 @@ namespace University.Controllers
             return View(departments.ToList());
         }
 
-        //
-        // GET: /Department/Details/5
-
         public ActionResult Details(int id = 0)
         {
             Department department = db.Departments.Find(id);
