@@ -29,9 +29,6 @@ namespace University.Controllers
             return View(department);
         }
 
-        //
-        // GET: /Department/Create
-
         public ActionResult Create()
         {
             ViewBag.PersonID = new SelectList(db.Instructors, "PersonID", "FullName");
