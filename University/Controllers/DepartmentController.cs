@@ -60,9 +60,6 @@ namespace University.Controllers
             return View(department);
         }
 
-        //
-        // POST: /Department/Edit/5
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DepartmentID, Name, Budget, StartDate, RowVersion, PersonID")] Department department)
@@ -112,9 +109,6 @@ namespace University.Controllers
             return View(department);
         }
 
-        //
-        // GET: /Department/Delete/5
-
         public ActionResult Delete(int id, bool? concurrencyError)
         {
             Department department = db.Departments.Find(id);
@@ -140,9 +134,6 @@ namespace University.Controllers
 
             return View(department);
         }
-
-        //
-        // POST: /Department/Delete/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
