@@ -22,9 +22,6 @@ namespace University.Controllers
             this.studentRepository = studentRepository;
         }
 
-        //
-        // GET: /Student/
-
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -74,25 +71,16 @@ namespace University.Controllers
             return View(students.ToPagedList(pageNumber, pageSize));
         }
 
-        //
-        // GET: /Student/Details/5
-
         public ViewResult Details(int id = 0)
         {
             Student student = studentRepository.GetStudentByID(id);
             return View(student);
         }
 
-        //
-        // GET: /Student/Create
-
         public ActionResult Create()
         {
             return View();
         }
-
-        //
-        // POST: /Student/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken] //helps prevent cross-site request forgery attacks
@@ -117,17 +105,11 @@ namespace University.Controllers
             return View(student);
         }
 
-        //
-        // GET: /Student/Edit/5
-
         public ViewResult Edit(int id = 0)
         {
             Student student = studentRepository.GetStudentByID(id);
             return View(student);
         }
-
-        //
-        // POST: /Student/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -151,9 +133,6 @@ namespace University.Controllers
             return View(student);
         }
 
-        //
-        // GET: /Student/Delete/5
-
         public ActionResult Delete(bool? saveChangesError = false, int id = 0)
         {
             if (saveChangesError.GetValueOrDefault())
@@ -167,9 +146,6 @@ namespace University.Controllers
             }
             return View(student);
         }
-
-        //
-        // POST: /Student/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
